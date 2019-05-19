@@ -61,17 +61,25 @@ if ($action == '' || $action == 'index' || $action == 'index.php' || $action == 
 } else if ($action == 'visualizarDepartamento') {
 	$cFunc = new ControllerDepartment();
 	$cFunc->getAllDepartments();
-} else if ($action == 'edit') {
-	$funcDAO = new FuncionarioDAO();
-	$funcionario = $funcDAO->getFuncionario($_POST['login']);
-	$depDAO = new DepartmentDAO();
-	$departments=$depDAO->getAllDepartments();
-	require_once $_SESSION['root'].'php/View/ViewEditaFuncionario.php';
+} else if ($action == 'edit' ) {
+	if(!(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']))
+		header('Location: exibeFuncionarios');
+	else{
+		$funcDAO = new FuncionarioDAO();
+		$funcionario = $funcDAO->getFuncionario($_POST['login']);
+		$depDAO = new DepartmentDAO();
+		$departments=$depDAO->getAllDepartments();
+		require_once $_SESSION['root'].'php/View/ViewEditaFuncionario.php';
+	}
 } else if ($action == 'disable') {
-	$funcDAO = new FuncionarioDAO();
-	$funcionario = $funcDAO->getFuncionario($_POST['login']);
-	$funcionario = $funcDAO->disableFuncionario($funcionario);
-	header('Location: exibeFuncionarios');
+	if(!(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']))
+		header('Location: exibeFuncionarios');
+	else{
+		$funcDAO = new FuncionarioDAO();
+		$funcionario = $funcDAO->getFuncionario($_POST['login']);
+		$funcionario = $funcDAO->disableFuncionario($funcionario);
+		header('Location: exibeFuncionarios');
+	}
 } else if ($action == 'logout') {
 	session_destroy();
 	header('Location: login');

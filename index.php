@@ -16,7 +16,7 @@ if (!isset($_SESSION["orderLogin"]))
 	$_SESSION["root"] = $_SERVER['DOCUMENT_ROOT'].$_SERVER['REQUEST_URI'];
 }*/
 
-$_SESSION["root"]="/opt/lampp/htdocs/projetofinal-pw2/";
+$_SESSION["root"]="C:/xampp/htdocs/WP2/projetofinal-pw2/";
 //print_r($_SESSION["root"] );
 
 //Chamo o arquivo responsável por gerenciar as rotas do sistema

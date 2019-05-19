@@ -3,6 +3,6 @@
 ;<?php die('Acesso Negado'); ?>
 [mysql]
 mysql_host     = localhost
-mysql_dbname   = empresa
+mysql_dbname   = wp2
 mysql_username = root
-mysql_password = ""
+mysql_password = "mysql23"

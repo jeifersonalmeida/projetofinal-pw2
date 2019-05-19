@@ -191,4 +191,5 @@ class FuncionarioDAO {
 				echo "Erro ao inserir na base de dados.".$e->getMessage();
 		}	
 	}
+
 }
