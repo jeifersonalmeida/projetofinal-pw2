@@ -6,7 +6,9 @@ include_once $_SESSION["root"].'php/Model/ModelDepartment.php';
 class ControllerDepartment {
 	function getAllDepartments(){
 		$depDAO = new DepartmentDAO();
-		$departments=$depDAO->getAllDepartments();
+		$departments = $depDAO->getAllDepartments();
+		$projDAO = new ProjectDAO();
+		
 		usort($departments, function ($a, $b){
 			if($a->getName() > $b->getName())
 						return $_SESSION["sortDep"];

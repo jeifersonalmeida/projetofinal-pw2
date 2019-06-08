@@ -59,4 +59,27 @@ class DepartmentDAO {
             echo "Insertion to DataBase failed".$e->getMessage();
         }		
 	}
+
+	function getDepartmentById($id){
+		$instance = DatabaseConnection::getInstance();
+		$conn = $instance->getConnection();
+
+		//Faço o select usando prepared statement
+		$statement = $conn->prepare("SELECT * FROM departamento WHERE idDepartamento = :id");
+		$statement->bindValue(":id", $id);		
+		$statement->execute();
+
+		//linhas recebe todas as tuplas retornadas do banco		
+		$linhas = $statement->fetchAll();
+		
+		//Verifico se houve algum retorno, senão retorno null
+		if(count($linhas)==0)
+				return null;
+
+		$department = new ModelDepartment();
+		$department->setDepartmentFromDataBase($linhas[0]);	
+
+		return $department;		
+	}
+	
 }

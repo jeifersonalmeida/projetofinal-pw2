@@ -14,12 +14,22 @@ include $_SESSION["root"].'includes/header.php';
 				//$funcionarios foi criado no controller que chamou essa classe;
 				echo "<tr>";
 					echo "<th style='text-align:center'><a href='sort'>Name</a></th>";
+					echo "<th style='text-align:center'>Projects</th>";
 					// echo "<th>Salary</th>";
 					// echo "<th>Login</th>";
 				echo "</tr>";
 				foreach ($departments as $value) {
 					echo "<tr>";
 						echo "<td>".$value->getName()."</td>";
+						$proj = $projDAO->getProjectByDepartment($value->getId());
+						echo "<td>";
+						if ($proj != null)
+							foreach($proj as $p){
+								echo $p->getName()."; ";
+							}
+						else
+							echo "";
+						echo "</td>";
 						// echo "<td>".$value->getSalario()."</td>";
 						// echo "<td>".$value->getLogin()."</td>";
 					echo "</tr>";

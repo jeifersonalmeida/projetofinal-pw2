@@ -3,6 +3,8 @@
 session_start();
 if (!isset($_SESSION["sortDep"]))
 	$_SESSION["sortDep"] = 1;
+if (!isset($_SESSION["sortProj"]))
+	$_SESSION["sortProj"] = 1;
 
 if (!isset($_SESSION["orderName"]))
 	$_SESSION["orderName"] = 1;

@@ -15,13 +15,11 @@ class ModelDepartment{
     
     public function setName($name){
         $this->name = $name;
-
         return $this;
     }
 
     public function setId($id){
         $this->idDepartment = $id;
-
         return $this;
     }
 

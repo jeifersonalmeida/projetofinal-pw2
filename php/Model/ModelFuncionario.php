@@ -201,5 +201,9 @@ class ModelFuncionario {
 
         return $this;
     }
+
+    public function getProjects(){
+        
+    }
 }
 ?>

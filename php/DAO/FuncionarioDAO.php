@@ -39,7 +39,7 @@ class FuncionarioDAO {
 		$conn = $instance->getConnection();
 
 		//Faço o select usando prepared statement
-		$sql = "SELECT * FROM funcionario";
+		$sql = "SELECT * FROM funcionario WHERE active is true";
 		$statement = $conn->prepare($sql);		
 		$statement->execute();
 
@@ -98,7 +98,7 @@ class FuncionarioDAO {
             return $statement->execute();
 
         } catch (PDOException $e) {
-            echo "Erro ao inserir na base de dados.".$e->getMessage();
+            echo "Failed to insert into database.".$e->getMessage();
         }		
 	}
 

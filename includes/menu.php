@@ -19,7 +19,13 @@
               if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
                 echo '<li class="cadastrarDepartamento"><a href="cadastrarDepartamento">Register Department</a></li>';
               }
-              echo '<li class=""><a href="visualizarDepartamento">Show Departments</a></li>';
+              echo '<li class="visualizarDepartamento"><a href="visualizarDepartamento">Show Departments</a></li>';
+              if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+                echo '<li class="cadastrarProjeto"><a href="cadastrarProjeto">Register Project</a></li>';
+              }
+              echo '<li class="visualizarProjeto"><a href="visualizarProjeto">Show Projects</a></li>';
+              if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'])
+                echo '<li class="assignProject"><a href="assignProject">Assign Project</a></li>';
             ?>
               <li class=""><a href="login">Logout</a></li>              
             </ul>            

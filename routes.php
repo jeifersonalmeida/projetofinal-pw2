@@ -27,6 +27,7 @@ echo "</pre>";*/
 include_once $_SESSION["root"].'php/Controller/ControllerLogin.php';
 include_once $_SESSION["root"].'php/Controller/ControllerFuncionario.php';
 include_once $_SESSION["root"].'php/Controller/ControllerDepartment.php';
+include_once $_SESSION["root"].'php/Controller/ControllerProject.php';
 
 //Sequencia de condicionais que verificam se a ação informada está roteada
 if ($action == '' || $action == 'index' || $action == 'index.php' || $action == 'login') {
@@ -94,6 +95,41 @@ if ($action == '' || $action == 'index' || $action == 'index.php' || $action == 
 	header("Location: exibeFuncionarios");
 } else if ($action == 'sort') {
 	header("Location: visualizarDepartamento");
+} else if ($action == 'cadastrarProjeto' && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+	$depDAO = new DepartmentDAO();
+	$departments=$depDAO->getAllDepartments();
+	require_once $_SESSION["root"].'php/View/ViewRegisterProject.php';
+} else if ($action == 'postCadastraProject') {
+	$cFunc = new ControllerProject();
+	$cFunc->setProject();
+} else if ($action == 'visualizarProjeto') {
+	$cFunc = new ControllerProject();
+	$cFunc->getAllProjects();
+} else if ($action == 'assignProject' && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+	$FuncionarioDAO = new FuncionarioDAO();
+	$employees=$FuncionarioDAO->getAllFuncionarios();
+
+	$projDAO = new ProjectDAO();
+	$projects = $projDAO->getAllProjects();
+
+	require_once $_SESSION["root"].'php/View/ViewAssignProject.php';
+} else if ($action == 'postAssignProject'){
+	$dao = new Func_ProjDAO();
+	$dao->setRel($_SESSION["projectForm"]["emp"], $_SESSION["projectForm"]["proj"]);
+	header('Location: exibeFuncionarios');
+} else if ($action == 'postDeassignProject'){
+	$dao = new Func_ProjDAO();
+	$dao->rmvRel($_SESSION["projectForm"]["emp"], $_SESSION["projectForm"]["proj"]);
+	header('Location: exibeFuncionarios');
+} else if ($action == 'actionProject' && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']){
+	$_SESSION["projectForm"]["emp"] = $_POST["emp"];
+	$_SESSION["projectForm"]["proj"] = $_POST["proj"];
+	if($_POST["action"] == "assign")
+		header("Location: postAssignProject");
+	else{
+		header("Location: postDeassignProject");
+
+	}
 } else {
 	echo "404: Page not found";
 	//isso trata todo erro 404, podemos criar uma view mais elegante para exibir o aviso ao usuário.

@@ -1,5 +1,5 @@
 <?php
-$titulo="Cadastrar Funcionario";
+$titulo="Register Employee";
 include $_SESSION["root"].'includes/header.php';
 ?>
 <body>
@@ -20,7 +20,7 @@ include $_SESSION["root"].'includes/header.php';
 						} ?>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="email">Login:<span class="requerido">*</span></label>
+							<label for="login">Login:<span class="requerido">*</span></label>
 							<input type="login" name="login" class="form-control" id="login" 
 								value="<?php if(isset($_SESSION["flash"]["login"]))echo $_SESSION["flash"]["login"];?>">
 						</div>

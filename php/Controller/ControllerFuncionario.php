@@ -1,12 +1,16 @@
 <?php
 
 include_once $_SESSION["root"].'php/DAO/FuncionarioDAO.php';
+include_once $_SESSION["root"].'php/DAO/Func_ProjDAO.php';
 include_once $_SESSION["root"].'php/Model/ModelFuncionario.php';
 
 class ControllerFuncionario {
 	function getAllFuncionarios(){
 		$funcDAO = new FuncionarioDAO();
 		$funcionarios=$funcDAO->getAllFuncionarios();
+		$Func_ProjDAO = new Func_ProjDAO();
+		$ProjDAO = new ProjectDAO();
+
 		if(isset($_SESSION["sort"]))
 			usort($funcionarios, function ($a, $b){
 				switch($_SESSION["sort"]){

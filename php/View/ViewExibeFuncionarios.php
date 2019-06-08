@@ -16,6 +16,7 @@ include $_SESSION["root"].'includes/header.php';
 					echo "<th style='text-align:center'><a href='sortByName'>Name</a></th>";
 					echo "<th style='text-align:center'><a href='sortBySalary'>Salary</a></th>";
 					echo "<th style='text-align:center'><a href='sortByLogin'>Login</a></th>";
+					echo "<th style='text-align:center'>Projects</th>";
 					echo "<th colspan='2'></th>";
 				echo "</tr>";
 				foreach ($funcionarios as $value) {
@@ -29,6 +30,18 @@ include $_SESSION["root"].'includes/header.php';
 							"<td>".$value->getSalario()."</td>";
 						echo 
 							"<td>".$value->getLogin()."</td>";
+						echo 
+							"<td>";
+						$projects=$Func_ProjDAO->getProj($value->getIdFuncionario());
+						if($projects != null)
+							foreach($projects as $p){
+								$proj = $ProjDAO->getProjectById($p["Projeto"]);
+								echo $proj->getName()."; ";
+							}
+						else{
+							echo "";
+						}
+						echo "</td>";
 						echo 
 							"<td>
 								<form action='edit' method='POST'>
